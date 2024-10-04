@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action="" method="post">
+    <div class="cup">
+        <div class="row">
+            <h1>Lab results</h1>
+            <div class="col-lg-6">
+                <label for="test_name">Test name</label>
+                <input type="text" name="test" placeholder="Enter the test name" required>
+            </div>
+            <div class="col-lg-6">
+                <label for="allergies">Allergies</label>
+                <input type="text" name="allergies" placeholder="Any allergies" required>
+            </div>
+            <div class="col-lg-6">
+                <label for="patient_name">Patient name</label>
+                <input type="text" name="patient" placeholder="Patient name" required>
+            </div>
+            <div class="col-lg-6">
+                <label for="Medication">Medication</label>
+                <input type="text" name="medication" placeholder="Medication" required>
+            </div>
+            <div class="col-lg-12">
+                <label for="test_method">Test method</label>
+                <input type="text" name="method" placeholder="Test method" required>
+            </div>
+            <div class="col-lg-12">
+                <label for="test_cost">Test cost</label>
+                <input type="text" name="cost" placeholder="Test cost" required>
+            </div>
+            <div class="col-lg-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

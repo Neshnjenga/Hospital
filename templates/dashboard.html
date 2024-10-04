@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if session['role']=='patient' %}
+<table class="table" style=" margin-top: 30px;">
+    <tr>
+        <th colspan="3"><h2 style="text-align: center;">My Appointments</h2></th>
+    </tr>
+    <tr>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Status</th>
+    </tr>
+    {% for fetch in data %}
+    <tr>
+        <td>{{fetch[2]}}</td>
+        <td>{{fetch[3]}}</td>
+        <td>
+            {% if fetch[8]=='Approved' %}
+            <button class="btn btn-primary">Approved</button>
+            {% elif fetch[8]=='Declined' %}
+            <button class="btn btn-primary">Declined</button>
+            {% elif fetch[8]=='done' %}
+            <button class="btn btn-primary">Checked</button>
+            {% else %}
+            <button class="btn btn-warning">Pending..</button>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<table class="table" style="margin-top: 60px;">
+    <tr>
+        <th colspan="5"><h2 style="text-align: center;">My Medical History</h2></th>
+    </tr>
+    <tr>
+        <th>Testname</th>
+        <th>Allergies</th>
+        <th>Medication</th>
+        <th>Test method</th>
+        <th>Test cost</th>
+    </tr>
+    {% for pip in tip %}
+    <tr style="color: green;">
+        <th>{{pip[2]}}</th>
+        <th>{{pip[3]}}</th>
+        <th>{{pip[5]}}</th>
+        <th>{{pip[6]}}</th>
+        <th>{{pip[7]}}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+<table class="table" style="margin-top: 60px;">
+    <tr>
+        <th colspan="7"><h2 style="text-align: center;">Doctor's Schedule</h2></th>
+    </tr>
+    <tr>
+        <th>Doctor</th>
+        <th>Day</th>
+        <th>9am-10am</th>
+        <th>10:30am-12pm</th>
+        <th>1pm-3:30pm</th>
+        <th>3:30pm-5pm</th>
+        <th>Action</th>
+    </tr>
+    {% for tea in main %}
+    <tr>
+        <td>{{tea[2]}}</td>
+        <td>{{tea[3]}}</td>
+        <td>{{tea[4]}}</td>
+        <td>{{tea[5]}}</td>
+        <td>{{tea[6]}}</td>
+        <td><a href="/appoint" class="btn btn-outline-success">Make appointment</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<table class="table" style="margin-bottom: 60px; width: auto;">
+    <tr>
+        <th colspan="6"><h2 style="text-align: center;">My Appointments</h2></th>
+    </tr>
+    <tr>
+        <th>Patient Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Date</th>
+        <th>Address</th>
+        <th>Action</th>
+    </tr>
+    {% for  fetch in team %}
+    <tr>
+        <td>{{fetch[2]}}</td>
+        <td>{{fetch[5]}}</td>
+        <td>{{fetch[4]}}</td>
+        <td>{{fetch[3]}}</td>
+        <td>{{fetch[7]}}</td>
+        <td>
+            {% if fetch[8]=='Approved' %}
+            <button class="btn btn-primary">Approved</button>
+            <a href="/lab" class="btn btn-outline-warning">Lab test</a>
+            {% elif fetch[8]=='Declined' %}
+            <button class="btn btn-primary">Declined</button>
+            <button class="btn btn-success">Checked</button>
+            {% elif fetch[8]=='done' %}
+            <button class="btn btn-primary">Done</button>
+            <button class="btn btn-success">Checked</button>
+            {% else %}
+            <a href="/chose" class="btn btn-outline-success">Approve/Decline</a>
+            <button class="btn btn-warning">Pending..</button>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<table class="table">
+    <tr>
+        <th colspan="6"><h2 style="text-align: center;">My Schedule</h2></th>
+    </tr>
+    <tr>
+        <td colspan="6"><a href="/add" class="btn btn-outline-success">Add Schedule</a></td>
+    </tr>
+    <tr>
+        <th>Day</th>
+        <th>9am-10am</th>
+        <th>10:30am-12pm</th>
+        <th>1pm-3:30pm</th>
+        <th>3:30pm-5pm</th>
+        <th>Action</th>
+    </tr>
+    {% for up in main %}
+    <tr>
+        <td>{{up[2]}}</td>
+        <td>{{up[3]}}</td>
+        <td>{{up[4]}}</td>
+        <td>{{up[5]}}</td>
+        <td>{{up[6]}}</td>
+        <td>
+            <button class="btn btn-primary">Update</button>
+            <button class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+    {% endfor %}
+   
+</table>
+{% endif %}
+{% endblock %}
